@@ -1,129 +1,140 @@
 import Navigation from "@/components/Navigation";
 import Icon from "@/components/ui/icon";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Index = () => {
-  const techStack = [
-    { name: "HTML/CSS", icon: "Globe", level: "Основа" },
-    { name: "JavaScript", icon: "Zap", level: "Логика" },
-    { name: "React", icon: "Layers", level: "Интерфейсы" },
-    { name: "Node.js", icon: "Server", level: "Бэкенд" },
+  const stats = [
+    { number: "500K+", label: "Вакансий в год", icon: "Briefcase" },
+    { number: "2.5M₽", label: "Средняя зарплата", icon: "TrendingUp" },
+    { number: "95%", label: "Трудоустройство", icon: "Target" },
+    { number: "∞", label: "Возможностей", icon: "Infinity" },
   ];
 
-  const benefits = [
-    { title: "Высокий доход", desc: "от 100 000₽ в месяц", icon: "DollarSign" },
-    { title: "Удаленная работа", desc: "Работай откуда угодно", icon: "Wifi" },
+  const features = [
     {
-      title: "Творчество",
-      desc: "Создавай цифровые продукты",
-      icon: "Palette",
+      title: "🚀 Быстрый старт",
+      desc: "От новичка до джуна за 6-12 месяцев",
+      color: "from-blue-400 to-blue-600",
+    },
+    {
+      title: "💰 Высокий доход",
+      desc: "Одна из самых высокооплачиваемых IT-профессий",
+      color: "from-green-400 to-green-600",
+    },
+    {
+      title: "🌍 Удаленка",
+      desc: "Работай из любой точки мира",
+      color: "from-purple-400 to-purple-600",
+    },
+    {
+      title: "🎨 Творчество",
+      desc: "Воплощай идеи в цифровые продукты",
+      color: "from-pink-400 to-pink-600",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-16 pb-24 px-4">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="relative pt-20 pb-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzODQzNTgiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-40"></div>
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
-            <h1 className="font-montserrat font-bold text-5xl md:text-6xl text-gray-900 mb-6">
-              Веб-разработчик
+            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-8">
+              Web Developer
             </h1>
-            <p className="font-opensans text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Профессия будущего, которая открывает безграничные возможности для
-              творчества и карьерного роста
+            <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed">
+              Создавай будущее интернета. Программируй завтра уже сегодня.
+              Присоединяйся к самой востребованной IT-профессии современности.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary text-white px-8 py-3 rounded-lg font-opensans font-semibold hover:bg-primary/90 transition-colors">
-                Начать обучение
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+              <button className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-10 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-cyan-500/25 transition-all transform hover:scale-105">
+                Начать путь
               </button>
-              <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-opensans font-semibold hover:bg-gray-50 transition-colors">
-                Узнать больше
+              <button className="border-2 border-blue-400 text-blue-400 px-10 py-4 rounded-full font-semibold text-lg hover:bg-blue-400 hover:text-white transition-all">
+                Изучить профессию
               </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-montserrat font-bold text-3xl text-center text-gray-900 mb-12">
-            Почему веб-разработка?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow animate-scale-in"
-              >
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Icon
-                    name={benefit.icon}
-                    size={24}
-                    className="text-primary"
-                  />
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center animate-scale-in">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Icon name={stat.icon} size={32} className="text-white" />
                 </div>
-                <h3 className="font-montserrat font-semibold text-xl text-gray-900 mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="font-opensans text-gray-600">{benefit.desc}</p>
+                <div className="text-3xl font-bold text-white mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-blue-300 text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tech Stack Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-montserrat font-bold text-3xl text-center text-gray-900 mb-12">
-            Основные технологии
+      {/* Features Grid */}
+      <section className="py-24 px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-white mb-16">
+            Почему именно веб-разработка?
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {techStack.map((tech, index) => (
-              <div
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Card
                 key={index}
-                className="text-center p-6 border border-gray-100 rounded-xl hover:border-primary/30 transition-colors"
+                className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all hover:scale-105 hover:shadow-2xl"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon name={tech.icon} size={32} className="text-primary" />
-                </div>
-                <h3 className="font-montserrat font-semibold text-lg text-gray-900 mb-1">
-                  {tech.name}
-                </h3>
-                <p className="font-opensans text-sm text-gray-500">
-                  {tech.level}
-                </p>
-              </div>
+                <CardContent className="p-8 text-center">
+                  <div
+                    className={`text-4xl mb-4 bg-gradient-to-r ${feature.color} bg-clip-text text-transparent font-bold`}
+                  >
+                    {feature.title.split(" ")[0]}
+                  </div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    {feature.title.slice(2)}
+                  </h3>
+                  <p className="text-blue-200 leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary to-purple-600">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="font-montserrat font-bold text-3xl mb-6">
-            Готов начать свой путь в веб-разработке?
-          </h2>
-          <p className="font-opensans text-xl mb-8 text-purple-100">
-            Изучи навыки и узнай о карьерных возможностях
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/skills"
-              className="bg-white text-primary px-8 py-3 rounded-lg font-opensans font-semibold hover:bg-gray-100 transition-colors"
-            >
-              Изучить навыки
-            </a>
-            <a
-              href="/career"
-              className="border border-white text-white px-8 py-3 rounded-lg font-opensans font-semibold hover:bg-white/10 transition-colors"
-            >
-              Карьерные пути
-            </a>
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-gradient-to-r from-cyan-500/20 to-purple-600/20 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
+            <h2 className="text-4xl font-bold text-white mb-6">
+              Готов изменить свою жизнь?
+            </h2>
+            <p className="text-xl text-blue-200 mb-10 leading-relaxed">
+              Изучи навыки, которые нужны работодателям, и познакомься с
+              карьерными возможностями
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a
+                href="/skills"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-green-500/25 transition-all transform hover:scale-105"
+              >
+                🛠️ Изучить навыки
+              </a>
+              <a
+                href="/career"
+                className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-10 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/25 transition-all transform hover:scale-105"
+              >
+                📈 Карьерный путь
+              </a>
+            </div>
           </div>
         </div>
       </section>

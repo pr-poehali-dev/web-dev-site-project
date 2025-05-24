@@ -1,247 +1,238 @@
 import Navigation from "@/components/Navigation";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Frontend разработка",
-      icon: "Monitor",
-      description:
-        "Современные технологии для создания пользовательских интерфейсов",
+  const [activeCategory, setActiveCategory] = useState("frontend");
+
+  const skillsData = {
+    frontend: {
+      title: "Frontend Development",
+      emoji: "🎨",
+      description: "Создание пользовательских интерфейсов",
       skills: [
-        { name: "React", level: 90, category: "framework" },
-        { name: "TypeScript", level: 85, category: "language" },
-        { name: "Next.js", level: 80, category: "framework" },
-        { name: "Tailwind CSS", level: 95, category: "styling" },
-        { name: "HTML/CSS", level: 95, category: "foundation" },
-        { name: "JavaScript", level: 90, category: "language" },
+        { name: "HTML5", level: 95, difficulty: "Легко", time: "1-2 недели" },
+        { name: "CSS3", level: 90, difficulty: "Легко", time: "2-3 недели" },
+        {
+          name: "JavaScript",
+          level: 85,
+          difficulty: "Средне",
+          time: "2-3 месяца",
+        },
+        { name: "React", level: 80, difficulty: "Средне", time: "3-4 месяца" },
+        {
+          name: "TypeScript",
+          level: 75,
+          difficulty: "Сложно",
+          time: "1-2 месяца",
+        },
+        {
+          name: "Next.js",
+          level: 70,
+          difficulty: "Сложно",
+          time: "2-3 месяца",
+        },
       ],
     },
-    {
-      title: "Backend разработка",
-      icon: "Server",
-      description: "Серверные технологии и управление данными",
+    backend: {
+      title: "Backend Development",
+      emoji: "⚙️",
+      description: "Серверная логика и базы данных",
       skills: [
-        { name: "Node.js", level: 75, category: "runtime" },
-        { name: "Express.js", level: 70, category: "framework" },
-        { name: "MongoDB", level: 65, category: "database" },
-        { name: "PostgreSQL", level: 60, category: "database" },
-        { name: "REST API", level: 80, category: "api" },
-        { name: "GraphQL", level: 50, category: "api" },
+        {
+          name: "Node.js",
+          level: 85,
+          difficulty: "Средне",
+          time: "2-3 месяца",
+        },
+        { name: "Python", level: 80, difficulty: "Легко", time: "1-2 месяца" },
+        {
+          name: "PostgreSQL",
+          level: 75,
+          difficulty: "Средне",
+          time: "1 месяц",
+        },
+        { name: "MongoDB", level: 70, difficulty: "Легко", time: "2-3 недели" },
+        { name: "Docker", level: 65, difficulty: "Сложно", time: "1-2 месяца" },
+        { name: "AWS", level: 60, difficulty: "Сложно", time: "3-6 месяцев" },
       ],
     },
-    {
-      title: "DevOps и инструменты",
-      icon: "Settings",
-      description: "Инфраструктура, развертывание и автоматизация",
+    tools: {
+      title: "Tools & Workflow",
+      emoji: "🔧",
+      description: "Инструменты разработчика",
       skills: [
-        { name: "Git", level: 85, category: "vcs" },
-        { name: "Docker", level: 60, category: "container" },
-        { name: "AWS", level: 45, category: "cloud" },
-        { name: "Vercel", level: 80, category: "hosting" },
-        { name: "GitHub Actions", level: 55, category: "ci-cd" },
-        { name: "Webpack", level: 70, category: "build" },
+        { name: "Git", level: 90, difficulty: "Легко", time: "1-2 недели" },
+        { name: "VS Code", level: 95, difficulty: "Легко", time: "1 неделя" },
+        {
+          name: "Chrome DevTools",
+          level: 85,
+          difficulty: "Средне",
+          time: "1 месяц",
+        },
+        { name: "Figma", level: 70, difficulty: "Легко", time: "2-3 недели" },
+        { name: "Terminal", level: 75, difficulty: "Средне", time: "1 месяц" },
+        {
+          name: "NPM/Yarn",
+          level: 80,
+          difficulty: "Легко",
+          time: "1-2 недели",
+        },
       ],
+    },
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
+    const colors = {
+      Легко: "bg-green-500",
+      Средне: "bg-yellow-500",
+      Сложно: "bg-red-500",
+    };
+    return colors[difficulty as keyof typeof colors] || "bg-gray-500";
+  };
+
+  const roadmapSteps = [
+    {
+      step: 1,
+      title: "Основы",
+      content: "HTML, CSS, JavaScript",
+      duration: "2-3 месяца",
+    },
+    {
+      step: 2,
+      title: "Фреймворки",
+      content: "React или Vue.js",
+      duration: "3-4 месяца",
+    },
+    {
+      step: 3,
+      title: "Backend",
+      content: "Node.js, базы данных",
+      duration: "4-6 месяцев",
+    },
+    {
+      step: 4,
+      title: "Продвинутое",
+      content: "TypeScript, DevOps",
+      duration: "6+ месяцев",
     },
   ];
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      framework: "bg-blue-500",
-      language: "bg-green-500",
-      styling: "bg-purple-500",
-      foundation: "bg-orange-500",
-      runtime: "bg-yellow-500",
-      database: "bg-red-500",
-      api: "bg-indigo-500",
-      vcs: "bg-gray-500",
-      container: "bg-cyan-500",
-      cloud: "bg-pink-500",
-      hosting: "bg-emerald-500",
-      "ci-cd": "bg-violet-500",
-      build: "bg-amber-500",
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-500";
-  };
-
-  const getSkillLevel = (level: number) => {
-    if (level >= 80) return { text: "Эксперт", color: "text-green-600" };
-    if (level >= 60) return { text: "Продвинутый", color: "text-blue-600" };
-    if (level >= 40) return { text: "Средний", color: "text-yellow-600" };
-    return { text: "Начальный", color: "text-gray-600" };
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <Navigation />
-      <div className="pt-16 pb-24 px-4">
-        <div className="max-w-6xl mx-auto">
+
+      <div className="pt-20 pb-24 px-4">
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="font-montserrat font-bold text-4xl text-gray-900 mb-6">
-              Навыки и технологии
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6">
+              Навыки веб-разработчика
             </h1>
-            <p className="font-opensans text-xl text-gray-600 max-w-3xl mx-auto">
-              Современный стек технологий для создания высококачественных
-              веб-приложений. Постоянно развиваюсь и изучаю новые инструменты.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Пошаговый гид по всем технологиям, которые нужно освоить для
+              успешной карьеры
             </p>
           </div>
 
+          {/* Category Tabs */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-white rounded-2xl p-2 shadow-lg border">
+              {Object.entries(skillsData).map(([key, category]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveCategory(key)}
+                  className={`px-8 py-4 rounded-xl transition-all font-semibold ${
+                    activeCategory === key
+                      ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  <span className="text-2xl mr-2">{category.emoji}</span>
+                  {category.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Skills Grid */}
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
-            {skillCategories.map((category, idx) => (
-              <Card
-                key={idx}
-                className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <Icon
-                        name={category.icon}
-                        size={24}
-                        className="text-primary"
-                      />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {skillsData[activeCategory as keyof typeof skillsData].skills.map(
+              (skill, index) => (
+                <Card
+                  key={skill.name}
+                  className="hover:shadow-xl transition-all hover:-translate-y-2 border-2 hover:border-indigo-200"
+                >
+                  <CardHeader className="pb-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <CardTitle className="text-lg">{skill.name}</CardTitle>
+                      <Badge
+                        className={`${getDifficultyColor(skill.difficulty)} text-white`}
+                      >
+                        {skill.difficulty}
+                      </Badge>
                     </div>
-                    <CardTitle className="text-xl">{category.title}</CardTitle>
-                  </div>
-                  <CardDescription>{category.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {category.skills.map((skill, skillIdx) => (
-                    <div key={skillIdx} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium text-sm">
-                            {skill.name}
-                          </span>
-                          <Badge
-                            variant="secondary"
-                            className={`${getCategoryColor(skill.category)} text-white text-xs`}
-                          >
-                            {skill.category}
-                          </Badge>
-                        </div>
-                        <span
-                          className={`text-xs font-medium ${getSkillLevel(skill.level).color}`}
-                        >
-                          {getSkillLevel(skill.level).text}
+                    <div className="text-sm text-gray-500">
+                      ⏱️ Время изучения: {skill.time}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="mb-4">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">
+                          Важность в индустрии
                         </span>
-                      </div>
-                      <div className="relative">
-                        <Progress value={skill.level} className="h-2" />
-                        <span className="absolute right-2 -top-6 text-xs text-gray-500">
+                        <span className="text-sm font-bold">
                           {skill.level}%
                         </span>
                       </div>
+                      <Progress value={skill.level} className="h-3" />
                     </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
+                    <div className="text-center">
+                      <button className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2 rounded-lg hover:shadow-lg transition-all">
+                        Изучить
+                      </button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ),
+            )}
           </div>
 
-          {/* Additional Info */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Target" size={20} />
-                  Цели развития
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="CheckCircle"
-                      size={16}
-                      className="text-green-500 mt-0.5"
-                    />
-                    <span>Углубить знания в архитектуре микросервисов</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="CheckCircle"
-                      size={16}
-                      className="text-green-500 mt-0.5"
-                    />
-                    <span>Изучить Kubernetes и контейнеризацию</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="CheckCircle"
-                      size={16}
-                      className="text-green-500 mt-0.5"
-                    />
-                    <span>Освоить машинное обучение для веба</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="CheckCircle"
-                      size={16}
-                      className="text-green-500 mt-0.5"
-                    />
-                    <span>Получить сертификацию AWS Solutions Architect</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Award" size={20} />
-                  Достижения
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="Medal"
-                      size={16}
-                      className="text-yellow-500 mt-0.5"
-                    />
-                    <span>15+ успешных проектов в портфолио</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="Medal"
-                      size={16}
-                      className="text-yellow-500 mt-0.5"
-                    />
-                    <span>Сертификация React Developer</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="Medal"
-                      size={16}
-                      className="text-yellow-500 mt-0.5"
-                    />
-                    <span>Участие в open-source проектах</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Icon
-                      name="Medal"
-                      size={16}
-                      className="text-yellow-500 mt-0.5"
-                    />
-                    <span>Ментор для начинающих разработчиков</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Learning Roadmap */}
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-100 border-2 border-indigo-200">
+            <CardHeader>
+              <CardTitle className="text-3xl text-center">
+                🗺️ Roadmap обучения
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-4 gap-6">
+                {roadmapSteps.map((step, index) => (
+                  <div key={step.step} className="text-center relative">
+                    {index < roadmapSteps.length - 1 && (
+                      <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-indigo-300 z-0"></div>
+                    )}
+                    <div className="relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold">
+                        {step.step}
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-600 mb-2">{step.content}</p>
+                      <Badge variant="outline" className="text-sm">
+                        {step.duration}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
